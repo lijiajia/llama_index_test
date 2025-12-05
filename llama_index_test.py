@@ -24,11 +24,13 @@ os.makedirs("./storage", exist_ok=True)
 
 documents = SimpleDirectoryReader(input_files=["./docs/三体.txt"]).load_data()
 
-# index = VectorStoreIndex.from_documents(documents, show_progress=True)
-# index.storage_context.persist(persist_dir="./storage")
+# 首次运行时，需要构建索引
+index = VectorStoreIndex.from_documents(documents, show_progress=True)
+index.storage_context.persist(persist_dir="./storage")
 
-storage_context = StorageContext.from_defaults(persist_dir="./storage")
-index = load_index_from_storage(storage_context)
+# 加载索引
+# storage_context = StorageContext.from_defaults(persist_dir="./storage")
+# index = load_index_from_storage(storage_context)
 
 query_engine = index.as_query_engine(similarity_top_k=20, timeout=600)
 
