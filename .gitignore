@@ -1,4 +1,4 @@
-.docs/
-.storage/
+docs/
+storage/
 .git/
 __pycache__/
